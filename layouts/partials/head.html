@@ -3,27 +3,28 @@
   <meta charset="utf-8">
   <title>{{ .Title }}</title>
 
-  {{ "<!-- mobile responsive meta -->" | safeHTML }}
+  {{ "<!-- mobile responsive meta --> " | safeHTML }}
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="{{ with .Params.Description }}{{ . }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}">
-  {{ with .Site.Params.author }}<meta name="author" content="{{ . }}">{{ end }}
+  <meta name="description"
+        content="{{ with .Params.Description }}{{ . }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}">
+  {{ with .Site.Params.author }}
+  <meta name="author" content="{{ . }}">
+  {{ end }}
   {{ hugo.Generator }}
 
-  {{ with .Site.BaseURL }}
-  <link rel="canonical" href="{{.}}/{{.Permalink}}">
-  {{ end }}
+  <link rel="canonical" href="{{ .Site.Params.canonicalURL }}{{ .Permalink | relURL }}">
 
-  {{ "<!-- plugins -->" | safeHTML }}
+  {{ "<!-- plugins --> " | safeHTML }}
   {{ range .Site.Params.plugins.css }}
   <link rel="stylesheet" href="{{ .link | absURL }}">
   {{ end }}
 
-  {{ "<!-- Main Stylesheet -->" | safeHTML }}
+  {{ "<!-- Main Stylesheet --> " | safeHTML }}
   {{ $styles := resources.Get "scss/style.scss" | toCSS | minify }}
   <link rel="stylesheet" href="{{ $styles.Permalink }}" media="screen">
 
-  {{ "<!--Favicon-->" | safeHTML }}
+  {{ "<!--Favicon--> " | safeHTML }}
   <link rel="shortcut icon" href="{{ `images/favicon.png` | absURL }}" type="image/x-icon">
   <link rel="icon" href="{{ `images/favicon.png` | absURL }}" type="image/x-icon">
 
