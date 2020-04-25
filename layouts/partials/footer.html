@@ -9,9 +9,9 @@ MOD-2 Only load Google Analytics if user opted in
 			<div class="col-md-12">
 				<div class="footer-manu">
 					<ul>
-            {{ range .Site.Menus.footer }}
-            <li><a href="{{ .URL }}">{{ .Name }}</a></li>
-            {{ end }}
+						{{ range .Site.Menus.footer }}
+						<li><a href="{{ .URL }}">{{ .Name }}</a></li>
+						{{ end }}
 					</ul>
 				</div>
 				<p class="copyright">{{ .Site.Params.copyright | markdownify }}</p>
@@ -58,7 +58,7 @@ MOD-2 Only load Google Analytics if user opted in
 <!-- google analitycs -->
 {{ if .Site.Params.google_analitycs_id }}
 
-{{ if .Site.Params.gdpr.enable }}
+{{ if and (.Site.Params.gdpr.enable) ( not (eq .Hugo.Environment "development")) }}
 <script>
 	gdpr.register(gdpr.optIn, function () {
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -75,7 +75,7 @@ MOD-2 Only load Google Analytics if user opted in
 		}
 	});
 </script>
-{{ else }}
+{{ else if not (eq .Hugo.Environment "development") }}
 <script>
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
