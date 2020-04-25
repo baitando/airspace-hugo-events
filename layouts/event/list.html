@@ -1,0 +1,42 @@
+{{ define "main" }}
+
+{{ partial "page-title.html" . }}
+
+<div class="page-wrapper">
+
+    <div class="container-fluid">
+        <div class="row">
+            {{ range sort .Pages ".Params.start_date" "asc"}}
+            <div class="col-md-4 event">
+                <div class="block text-center">
+                    <i class="{{ .Params.icon }} fa-3x"></i>
+                    <h3 class="event-title">
+                        <!-- Start and end on the same date or end date not set -->
+                        {{ if and (and (isset .Params "start_date") (isset .Params "end_date")) (not (eq .Params.start_date .Params.end_date)) }}
+                            <!-- Start and end on different days in same month and year -->
+                            {{ if eq ( dateFormat "01.2006" .Params.start_date) ( dateFormat "01.2006" .Params.end_date) }}
+                                {{ dateFormat "02." .Params.start_date }}-{{ dateFormat "02.01.2006" .Params.end_date }} {{ .Title | markdownify }}
+                            <!-- Start and end on different days in different months of the same year -->
+                            {{ else if eq ( dateFormat "2006" .Params.start_date) ( dateFormat "2006" .Params.end_date )}}
+                                {{ dateFormat "02.01." .Params.start_date }}-{{ dateFormat "02.01.2006" .Params.end_date }} {{ .Title | markdownify }}
+                            <!-- Start and end on different days in different months of different years -->
+                            {{ else }}
+                                {{ dateFormat "02.01.2006" .Params.start_date }}-{{ dateFormat "02.01.2006" .Params.end_date }} {{ .Title | markdownify }}
+                            {{ end }}
+                    </h3>
+                    <!-- Only start date is set -->
+                    {{ else if isset .Params "start_date" }}
+                            {{ dateFormat "02.01.2006" .Params.start_date }} {{ .Title | markdownify }}</h3>
+                    {{ end }}
+
+
+                    <p>{{ .Summary | markdownify }}</p>
+                </div>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+
+</div>
+
+{{ end }}
