@@ -1,6 +1,7 @@
 <!--
 MOD-1 Add GDPR related cookie consent script
 MOD-2 Only load Google Analytics if user opted in
+MOD-3 Replace absolute with relative URLs
 -->
 
 <footer class="footer">
@@ -26,8 +27,9 @@ MOD-2 Only load Google Analytics if user opted in
 {{ end }}
 
 <!-- JS Plugins -->
+<!-- MOD-3 -->
 {{ range .Site.Params.plugins.js}}
-<script src="{{ .link | absURL }}"></script>
+<script src="{{ .link | relURL }}"></script>
 {{ end }}
 
 <!-- Main Script -->
