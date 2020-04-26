@@ -24,7 +24,8 @@
 
   {{ "<!-- Main Stylesheet --> " | safeHTML }}
   {{ $styles := resources.Get "scss/style.scss" | toCSS | minify }}
-  <link rel="stylesheet" href="{{ $styles.Permalink }}" media="screen">
+  <!-- MOD-2 -->
+  <link rel="stylesheet" href="{{ $styles.Permalink | relURL }}" media="screen">
 
   {{ "<!--Favicon--> " | safeHTML }}
   <!-- MOD-2 -->

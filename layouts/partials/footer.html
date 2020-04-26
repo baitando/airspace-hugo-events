@@ -34,7 +34,8 @@ MOD-3 Replace absolute with relative URLs
 
 <!-- Main Script -->
 {{ $script := resources.Get "js/script.js" | minify}}
-<script src="{{ $script.Permalink }}"></script>
+<!-- MOD-3 -->
+<script src="{{ $script.Permalink | relURL }}"></script>
 
 <!-- MOD-1 -->
 <!-- gdpr -->
@@ -51,7 +52,8 @@ MOD-3 Replace absolute with relative URLs
 		"href": '{{ .Site.Params.gdpr.data_privacy_url }}'
 	};
 </script>
-<script src="{{ $script.Permalink }}"></script>
+<!-- MOD-3 -->
+<script src="{{ $script.Permalink | relURL}}"></script>
 
 {{ end }}
 

@@ -1,5 +1,6 @@
-<!-- Modifications of airspace-hugo
-- Remove logo (MOD-1)
+<!--
+MOD-1 Remove logo
+MOD-2 Replace absolute with relative URLs
 -->
 
 <!-- Header Start -->
@@ -26,7 +27,8 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="navigation">
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="{{ .Site.BaseURL | absLangURL }}">{{ .Site.Params.home }}</a></li>
+              <!-- MOD-2 -->
+              <li><a href="{{ .Site.BaseURL | relLangURL }}">{{ .Site.Params.home }}</a></li>
 
               {{ range .Site.Menus.main }}
               {{ if .HasChildren }}
@@ -35,12 +37,14 @@
                   aria-expanded="false">{{ .Name }} <span class="ion-ios-arrow-down"></span></a>
                 <ul class="dropdown-menu">
                   {{ range .Children }}
-                  <li><a href="{{ .URL | absLangURL }}">{{ .Name }}</a></li>
+                  <!-- MOD-2 -->
+                  <li><a href="{{ .URL | relLangURL }}">{{ .Name }}</a></li>
                   {{ end }}
                 </ul>
               </li>
               {{ else }}
-              <li><a href="{{ .URL | absLangURL }}">{{ .Name }}</a></li>
+              <!-- MOD-2 -->
+              <li><a href="{{ .URL | relLangURL }}">{{ .Name }}</a></li>
               {{ end }}
               {{ end }}
 
@@ -56,11 +60,13 @@
                   {{ if eq $translation.Lang .Lang }}
                   {{ $selected := false }}
                   {{ if eq $pageLang .Lang}}
-                  <option id="{{ $translation.Language }}" value="{{ $translation.Permalink }}" selected>
+                  <!-- MOD-2 -->
+                  <option id="{{ $translation.Language }}" value="{{ $translation.Permalink | relURL }}" selected>
                     {{ .LanguageName }}
                   </option>
                   {{ else }}
-                  <option id="{{ $translation.Language }}" value="{{ $translation.Permalink }}">{{ .LanguageName }}
+                  <!-- MOD-2 -->
+                  <option id="{{ $translation.Language }}" value="{{ $translation.Permalink | relURL }}">{{ .LanguageName }}
                   </option>
                   {{ end }}
                   {{ end }}
