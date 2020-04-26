@@ -1,5 +1,7 @@
 <!-- MOD-1 Add canonical URL -->
 <!-- MOD-2 Replace absolute with relative URLs -->
+
+<!-- MOD-3 Add optional hosted Osano Cookie Consent integration -->
 <head>
   <meta charset="utf-8">
   <title>{{ .Title }}</title>
@@ -33,4 +35,8 @@
   <!-- MOD-2 -->
   <link rel="icon" href="{{ `images/favicon.png` | relURL }}" type="image/x-icon">
 
+  <!-- MOD-3 -->
+  {{ with .Site.Params.osano.scriptURL }}
+  <script src="{{ . }}"></script>
+  {{ end }}
 </head>
