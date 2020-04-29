@@ -36,7 +36,7 @@
   <link rel="icon" href="{{ `images/favicon.png` | relURL }}" type="image/x-icon">
 
   <!-- MOD-3 -->
-  {{ with .Site.Params.osano.scriptURL }}
-  <script src="{{ . }}"></script>
+  {{ if and (not (eq .Hugo.Environment "development")) (.Site.Params.osano.scriptURL) }}
+  <script src="{{ .Site.Params.osano.scriptURL }}"></script>
   {{ end }}
 </head>
