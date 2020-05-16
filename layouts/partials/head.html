@@ -1,7 +1,8 @@
 <!-- MOD-1 Add canonical URL -->
 <!-- MOD-2 Replace absolute with relative URLs -->
-
 <!-- MOD-3 Add optional hosted Osano Cookie Consent integration -->
+<!-- MOD-4 Netlify Identity for Netlify CMS -->
+
 <head>
   <meta charset="utf-8">
   <title>{{ .Title }}</title>
@@ -39,4 +40,7 @@
   {{ if and (not (eq .Hugo.Environment "development")) (.Site.Params.osano.scriptURL) }}
   <script src="{{ .Site.Params.osano.scriptURL }}"></script>
   {{ end }}
+
+  <!-- MOD-4 -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>

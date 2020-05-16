@@ -2,6 +2,7 @@
 MOD-1 Add GDPR related cookie consent script
 MOD-2 Only load Google Analytics if user opted in
 MOD-3 Replace absolute with relative URLs
+MOD-4 Netlify Identity for Netlify CMS
 -->
 
 <footer class="footer">
@@ -90,4 +91,16 @@ MOD-3 Replace absolute with relative URLs
 </script>
 {{ end }}
 
+<!-- MOD-4 -->
+<script>
+	if (window.netlifyIdentity) {
+		window.netlifyIdentity.on("init", user => {
+			if (!user) {
+				window.netlifyIdentity.on("login", () => {
+					document.location.href = "/admin/";
+				});
+			}
+		});
+	}
+</script>
 {{end}}
