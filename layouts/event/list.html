@@ -12,7 +12,7 @@
                     <i class="{{ .Params.icon }} fa-3x"></i>
                     <h3 class="event-title">
                         <!-- Start and end on the same date or end date not set -->
-                        {{ if and (and (isset .Params "start_date") (isset .Params "end_date")) (not (eq .Params.end_date false)) (not (eq .Params.start_date .Params.end_date)) }}
+                        {{ if and (and (isset .Params "start_date") (isset .Params "end_date")) (not (eq .Params.end_date false)) (not (eq .Params.end_date "")) (not (eq .Params.start_date .Params.end_date)) }}
                             <!-- Start and end on different days in same month and year -->
                             {{ if eq ( dateFormat "01.2006" .Params.start_date) ( dateFormat "01.2006" .Params.end_date) }}
                                 {{ dateFormat "02." .Params.start_date }}-{{ dateFormat "02.01.2006" .Params.end_date }} {{ .Title | markdownify }}
